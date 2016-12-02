@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE schema [
+<!ELEMENT schema (name,path,info,items)>
+<!ELEMENT name (#CDATA)>
+<!ELEMENT path (#CDATA)>
+<!ELEMENT info (#CDATA)>
+<!ELEMENT items (item+)>
+<!ELEMENT item (name,path,info,items?)>
+]>
