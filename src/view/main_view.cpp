@@ -18,8 +18,8 @@ namespace DDType {
 	MainView::MainView()
 	{
 		construct_tree_view();
-		pack_end(m_tree_view,true,true);
-		pack_end(m_info_view,true,true);
+		pack_start(m_tree_view,true,true);
+		pack_start(m_info_view,true,true);
 		set_spacing(5);
 	}
 	void MainView::construct_tree_view()
