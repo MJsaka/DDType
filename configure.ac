@@ -21,7 +21,8 @@ PKG_CHECK_MODULES([GTKMM], [gtkmm-3.0])
 PKG_CHECK_MODULES([LIBXMLPP], [libxml++-3.0])
 PKG_CHECK_MODULES([LIBSIGCXX], [sigc++-2.0])
 
-AC_CONFIG_FILES([Makefile
+AC_CONFIG_FILES([
+				 Makefile
 				 src/Makefile
-				 test/Makefile])
+				 ])
 AC_OUTPUT
