@@ -12,53 +12,53 @@
 
 namespace DDType
 {
-	Item::Item(const xmlpp::Node* item_node)
+	Unit::Unit(const xmlpp::Node* unit_node)
 	{
 		const static auto sep = Glib::ustring("    ");
 		static auto left_sep = Glib::ustring();
 
-		auto name_path = item_node->get_first_child("name")->get_path();
-		m_name = item_node->eval_to_string(name_path);
+		auto name_path = unit_node->get_first_child("name")->get_path();
+		m_name = unit_node->eval_to_string(name_path);
 
-		auto path_path = item_node->get_first_child("path")->get_path();
-		m_path = item_node->eval_to_string(path_path);
+		auto path_path = unit_node->get_first_child("path")->get_path();
+		m_path = unit_node->eval_to_string(path_path);
 
-		auto info_path = item_node->get_first_child("info")->get_path();
-		m_info = item_node->eval_to_string(info_path);
+		auto info_path = unit_node->get_first_child("info")->get_path();
+		m_info = unit_node->eval_to_string(info_path);
 
-		m_sub_items = std::vector<Item>();
+		m_sub_units = std::vector<Unit>();
 
-		auto items_node = item_node->get_first_child("items");
-		//std::cout<<left_sep<<"before items"<<std::endl;
+		auto units_node = unit_node->get_first_child("units");
+		//std::cout<<left_sep<<"before units"<<std::endl;
 		left_sep += sep;
-		if (items_node != nullptr)
+		if (units_node != nullptr)
 		{
-			auto sub_item_nodes = items_node->get_children("item");
-			for(auto iter : sub_item_nodes)
+			auto sub_unit_nodes = units_node->get_children("unit");
+			for(auto iter : sub_unit_nodes)
 			{
-				auto item = Item(iter);
-				m_sub_items.push_back(item);
+				auto unit = Unit(iter);
+				m_sub_units.push_back(unit);
 			}
 		}
 		left_sep = left_sep.substr(0,left_sep.size() - sep.size());
-		//std::cout<<left_sep<<"after items"<<std::endl;
+		//std::cout<<left_sep<<"after units"<<std::endl;
 	}
 }
-std::ostream& operator<<(std::ostream& os, const DDType::Item& item)
+std::ostream& operator<<(std::ostream& os, const DDType::Unit& unit)
 {
 	const static auto sep = Glib::ustring("    ");
 	static auto left_sep = Glib::ustring();
 
-	os<<left_sep<<item.name()<<sep<<item.path()<<sep<<item.info()<<std::endl;
+	os<<left_sep<<unit.name()<<sep<<unit.path()<<sep<<unit.info()<<std::endl;
 
-	//std::cout<<left_sep<<"before items print"<<std::endl;
+	//std::cout<<left_sep<<"before units print"<<std::endl;
 	left_sep += sep;
-	for(auto iter : item.sub_items())
+	for(auto iter : unit.sub_units())
 	{
 		os<<iter;
 	}
 	left_sep = left_sep.substr(0,left_sep.size() - sep.size());
-	//std::cout<<left_sep<<"after items print"<<std::endl;
+	//std::cout<<left_sep<<"after units print"<<std::endl;
 
 	return os;
 }

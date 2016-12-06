@@ -5,28 +5,28 @@
 	<name>zm</name>
 	<path>zmpath</path>
 	<info>zminfo</info>
-	<items>
-		<item>
+	<units>
+		<unit>
 			<name>zm1</name>
 			<path>zmpath1</path>
 			<info>zminfo1</info>
-			<items>
-				<item>
+			<units>
+				<unit>
 					<name>zm1.1</name>
 					<path>zmpath1.1</path>
 					<info>zminfo1.1</info>
-				</item>
-				<item>
+				</unit>
+				<unit>
 					<name>zm1.2</name>
 					<path>zmpath1.2</path>
 					<info>zminfo1.2</info>
-				</item>
-			</items>
-		</item>
-		<item>
+				</unit>
+			</units>
+		</unit>
+		<unit>
 			<name>zm2</name>
 			<path>zmpath2</path>
 			<info>zminfo2</info>
-		</item>
-	</items>
+		</unit>
+	</units>
 </schema>
