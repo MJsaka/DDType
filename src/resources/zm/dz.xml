@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE data SYSTEM "unit_data.dtd">
+
+<data>
+	<item>
+		<target>一</target>
+		<code>a</code>
+	</item>
+	<item>
+		<target>要</target>
+		<code>f</code>
+		<code>fjzm</code>
+	</item>
+</data>

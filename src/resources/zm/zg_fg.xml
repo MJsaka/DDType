@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE data SYSTEM "unit_data.dtd">
+
+<data>
+	<item>
+		<target>二</target>
+		<code>bd</code>
+	</item>
+	<item>
+		<target>三</target>
+		<code>cd</code>
+	</item>
+</data>

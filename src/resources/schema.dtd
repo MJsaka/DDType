@@ -5,3 +5,4 @@
 <!ELEMENT info (#PCDATA)>
 <!ELEMENT units (unit+)>
 <!ELEMENT unit (name,path,info,units?)>
+<!ATTLIST unit catalog (true|false) #REQUIRED>
