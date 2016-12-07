@@ -1,7 +1,5 @@
 ## Process this file with automake to produce Makefile.in
 bin_PROGRAMS = ddtype
-schemadir = $(pkgdatadir)/schema
-dist_schema_DATA = resources/schema.dtd resources/zm.xml
 
 ddtype_SOURCES = \
 				 main.cc \
@@ -11,6 +9,10 @@ ddtype_SOURCES = \
 				 model/schema.cpp \
 				 model/schema_manager.hpp \
 				 model/schema_manager.cpp \
+				 model/unit_data_item.hpp \
+				 model/unit_data_item.cpp \
+				 model/unit_log_item.hpp \
+				 model/unit_log_item.cpp \
 				 view/window_manager.hpp \
 				 view/window_manager.cpp \
 				 view/main_window.hpp \
@@ -22,8 +24,22 @@ ddtype_SOURCES = \
 				 view/test_window.hpp \
 				 view/test_window.cpp 
 
-EXTRA_DIST = $(dist_schema_DATA)
+schemadir = $(pkgdatadir)/schema
+dist_schema_DATA = \
+				   resources/schema.dtd \
+				   resources/zm.xml 
+
+schemadatadir = $(pkgdatadir)/schema_data
+zmdir = $(schemadatadir)/zm
+dist_zm_DATA = \
+				   resources/unit_data.dtd \
+				   resources/zm/dz.xml \
+				   resources/zm/zg_zg.xml \
+				   resources/zm/zg_fg.xml
+
+EXTRA_DIST = $(dist_schema_DATA) $(dist_zm_DATA)
 
 uninstall-local:
+	-rm -r $(zmdir)
 	-rm -r $(schemadir)
 	-rm -r $(pkgdatadir)

@@ -8,7 +8,7 @@
 #define type_controller_hpp
 #include <glibmm.h>
 #include "../view/type_interface.hpp"
-#include "../model/item_data_model.hpp"
+#include "../model/unit_data_item.hpp"
 
 namespace DDType
 {
@@ -20,7 +20,7 @@ namespace DDType
 			void set_unit_path(Glib::ustring path);
 		private:
 			TypeInterface& m_window;
-			std::list<ItemData> m_item_data_list;
+			std::list<UnitDataItem> m_unit_data_list;
 			int m_max_code_len_of_current_item;
 			std::vector<char> m_input;
 	};
