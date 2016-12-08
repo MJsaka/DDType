@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE data SYSTEM "unit_data.dtd">
+<!DOCTYPE data SYSTEM "file:///usr/local/share/ddtype/schema/dtd/unit_data.dtd">
 
 <data>
 	<item>

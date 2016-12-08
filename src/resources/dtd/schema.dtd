@@ -3,4 +3,4 @@
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT path (#PCDATA)>
 <!ELEMENT units (unit+)>
-<!ELEMENT unit (name,info,units?)>
+<!ELEMENT unit (name,path,units?)>

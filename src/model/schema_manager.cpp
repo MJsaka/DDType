@@ -10,8 +10,8 @@
 
 namespace DDType
 {
-	const static std::string schema_path("/usr/local/share/ddtype/schema/zm.xml");
-	const static Glib::ustring data_path_base("/usr/local/share/ddtype/schema/data");
+	const static std::string schema_path("/usr/local/share/ddtype/schema/def/zm.xml");
+	const static Glib::ustring data_path_base("/usr/local/share/ddtype/schema/data/");
 	std::vector<Schema> SchemaManager::sm_schemas;
 
 	void SchemaManager::update_schemas()
@@ -31,17 +31,17 @@ namespace DDType
 	{
 		Glib::ustring sub_path;
 		auto schema = sm_schemas[path[0]];
-		sub_path += "/" + schema.path();
+		sub_path += schema.path() + "/";
 
 		Unit& unit = schema;
 		auto sub = schema.sub_units();
 		for (int i = 1; i < path.size(); ++i)
 		{
 			unit = sub[path[i]];
-			sub_path += "/" + unit.path();
+			sub_path += unit.path() + "/";
 			sub = unit.sub_units();
 		}
-		sub_path += ".xml";
+		sub_path += "data.xml";
 		return data_path_base + sub_path;
 	}
 }

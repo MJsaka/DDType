@@ -25,21 +25,25 @@ ddtype_SOURCES = \
 				 view/test_window.cpp 
 
 schemadir = $(pkgdatadir)/schema
-dist_schema_DATA = \
-				   resources/schema.dtd \
-				   resources/zm.xml 
 
-schemadatadir = $(pkgdatadir)/schema_data
+schemadefdir = $(schemadir)/def
+dist_schemadef_DATA = resources/def/zm.xml 
+
+schemadtddir = $(schemadir)/dtd
+dist_schemadtd_DATA = resources/dtd/schema.dtd \
+				resources/dtd/unit_data.dtd \
+				resources/dtd/unit_log.dtd
+
+schemadatadir = $(pkgdatadir)/schema/data
 zmdir = $(schemadatadir)/zm
-dist_zm_DATA = \
-				   resources/unit_data.dtd \
-				   resources/zm/dz.xml \
-				   resources/zm/zg_zg.xml \
-				   resources/zm/zg_fg.xml
+zmdzdir = $(zmdir)/dz
+dist_zmdz_DATA = resources/data/zm/dz/data.xml 
+zmzgzgdir = $(zmdir)/zg/zg
+dist_zmzgzg_DATA = resources/data/zm/zg/zg/data.xml 
+zmzgfgdir = $(zmdir)/zg/fg
+dist_zmzgfg_DATA = resources/data/zm/zg/fg/data.xml 
 
-EXTRA_DIST = $(dist_schema_DATA) $(dist_zm_DATA)
+EXTRA_DIST = $(dist_schemadef_DATA) $(dist_schemadtd_DATA) $(dist_zmdz_DATA) $(dist_zmzgzg_DATA) $(dist_zmzgfg_DATA)
 
 uninstall-local:
-	-rm -r $(zmdir)
-	-rm -r $(schemadir)
 	-rm -r $(pkgdatadir)
