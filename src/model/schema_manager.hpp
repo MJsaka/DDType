@@ -13,11 +13,15 @@ namespace DDType
 	class SchemaManager 
 	{
 		public:
-			SchemaManager();
-			const std::vector<Schema>& schemas() const {return m_schemas;};
+			static void update_schemas();
+			static const std::vector<Schema>& schemas() {return sm_schemas;};
+			static const Glib::ustring unit_data_path(const Gtk::TreeModel::Path& path);
 
 		private:
-			std::vector<Schema> m_schemas;
+			SchemaManager();
+			SchemaManager(SchemaManager&);
+			SchemaManager& operator= (const SchemaManager&);
+			static std::vector<Schema> sm_schemas;
 	};
 }
 #endif
