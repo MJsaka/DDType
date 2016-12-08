@@ -27,21 +27,24 @@ ddtype_SOURCES = \
 schemadir = $(pkgdatadir)/schema
 
 schemadefdir = $(schemadir)/def
-dist_schemadef_DATA = resources/def/zm.xml 
-
 schemadtddir = $(schemadir)/dtd
-dist_schemadtd_DATA = resources/dtd/schema.dtd \
-				resources/dtd/unit_data.dtd \
-				resources/dtd/unit_log.dtd
+schemadatadir = $(schemadir)/data
+schemainfodir = $(schemadir)/info
 
-schemadatadir = $(pkgdatadir)/schema/data
 zmdir = $(schemadatadir)/zm
+
 zmdzdir = $(zmdir)/dz
-dist_zmdz_DATA = resources/data/zm/dz/data.xml 
 zmzgzgdir = $(zmdir)/zg/zg
-dist_zmzgzg_DATA = resources/data/zm/zg/zg/data.xml 
 zmzgfgdir = $(zmdir)/zg/fg
-dist_zmzgfg_DATA = resources/data/zm/zg/fg/data.xml 
+
+dist_schemadef_DATA = resources/schema/def/zm.xml 
+dist_schemadtd_DATA = resources/schema/dtd/schema.dtd \
+				resources/schema/dtd/unit_data.dtd \
+				resources/schema/dtd/unit_log.dtd
+
+dist_zmdz_DATA = resources/schema/data/zm/dz/data.xml 
+dist_zmzgzg_DATA = resources/schema/data/zm/zg/zg/data.xml 
+dist_zmzgfg_DATA = resources/schema/data/zm/zg/fg/data.xml 
 
 EXTRA_DIST = $(dist_schemadef_DATA) $(dist_schemadtd_DATA) $(dist_zmdz_DATA) $(dist_zmzgzg_DATA) $(dist_zmzgfg_DATA)
 
