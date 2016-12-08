@@ -23,6 +23,7 @@ namespace DDType {
 		m_h_box.pack_start(m_info_view,true,true);
 		m_h_box.set_spacing(5);
 
+
 		set_title("DDType");
 		set_border_width(5);
 		add(m_h_box);
@@ -32,8 +33,8 @@ namespace DDType {
 	{
 		m_model_columns.add(m_col_name);
 		m_ref_tree_store = Gtk::TreeStore::create(m_model_columns);
-		auto schema_manager = SchemaManager();
-		auto schemas = schema_manager.schemas();
+		SchemaManager::update_schemas();
+		auto schemas = SchemaManager::schemas();
 		for (auto schema : schemas)
 		{
 			auto tree_iter_schema = m_ref_tree_store->append();
@@ -61,7 +62,6 @@ namespace DDType {
 		Gtk::TreeModel::iterator iter = m_ref_tree_store -> get_iter(path);
 		if(iter){
 			Gtk::TreeRow row = *iter;
-			std::cout<<row[m_col_name]<<std::endl;
 			m_buffer->set_text(row[m_col_name]);
 		}
 	}
