@@ -17,7 +17,7 @@ namespace DDType
 		public:
 			TypeController(TypeInterface& window);
 			void on_typed(char c);
-			void set_unit_path(Glib::ustring path);
+			void set_unit_path(std::string path);
 		private:
 			TypeInterface& m_window;
 			std::list<UnitDataItem> m_unit_data_list;
