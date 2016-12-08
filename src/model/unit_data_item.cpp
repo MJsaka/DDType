@@ -7,6 +7,7 @@
 
 #include "unit_data_item.hpp"
 #include <libxml++/libxml++.h>
+#include <iostream>
 
 namespace DDType
 {
@@ -18,7 +19,8 @@ namespace DDType
 		auto code_nodes = data_item_node->get_children("code");
 		for(auto code_node : code_nodes)
 		{
-			auto code = data_item_node->eval_to_string(code_node->get_path());
+			auto code_path = code_node->get_path();
+			auto code = data_item_node->eval_to_string(code_path);
 			m_codes.push_back(code);
 		}
 	}
