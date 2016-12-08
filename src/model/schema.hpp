@@ -8,6 +8,7 @@
 #define schema_hpp
 
 #include <glibmm.h>
+#include <gtkmm.h>
 #include <libxml++/libxml++.h>
 
 namespace DDType
@@ -16,15 +17,15 @@ namespace DDType
 	{
 		public:
 			explicit Unit(const xmlpp::Node* unit_node);
-			Glib::ustring name() const {return m_name;};
-			Glib::ustring path() const {return m_path;};
-			Glib::ustring info() const {return m_info;};
+			const bool is_catalog() const {return m_is_catalog;};
+			const Glib::ustring& name() const {return m_name;};
+			const Glib::ustring& path() const {return m_path;};
 			const std::vector<Unit>& sub_units() const {return m_sub_units;};
 
 		private:
+			bool m_is_catalog;
 			Glib::ustring m_name;
 			Glib::ustring m_path;
-			Glib::ustring m_info;
 			std::vector<Unit> m_sub_units;
 
 		protected:

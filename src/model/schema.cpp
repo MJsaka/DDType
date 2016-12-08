@@ -14,34 +14,26 @@ namespace DDType
 {
 	Unit::Unit(const xmlpp::Node* unit_node)
 	{
-		const static auto sep = Glib::ustring("    ");
-		static auto left_sep = Glib::ustring();
-
 		auto name_path = unit_node->get_first_child("name")->get_path();
 		m_name = unit_node->eval_to_string(name_path);
 
 		auto path_path = unit_node->get_first_child("path")->get_path();
 		m_path = unit_node->eval_to_string(path_path);
 
-		auto info_path = unit_node->get_first_child("info")->get_path();
-		m_info = unit_node->eval_to_string(info_path);
-
-		m_sub_units = std::vector<Unit>();
-
 		auto units_node = unit_node->get_first_child("units");
-		//std::cout<<left_sep<<"before units"<<std::endl;
-		left_sep += sep;
 		if (units_node != nullptr)
 		{
+			m_is_catalog = true;
 			auto sub_unit_nodes = units_node->get_children("unit");
 			for(auto iter : sub_unit_nodes)
 			{
 				auto unit = Unit(iter);
 				m_sub_units.push_back(unit);
 			}
+		}else
+		{
+			m_is_catalog = false;
 		}
-		left_sep = left_sep.substr(0,left_sep.size() - sep.size());
-		//std::cout<<left_sep<<"after units"<<std::endl;
 	}
 }
 std::ostream& operator<<(std::ostream& os, const DDType::Unit& unit)
@@ -49,16 +41,14 @@ std::ostream& operator<<(std::ostream& os, const DDType::Unit& unit)
 	const static auto sep = Glib::ustring("    ");
 	static auto left_sep = Glib::ustring();
 
-	os<<left_sep<<unit.name()<<sep<<unit.path()<<sep<<unit.info()<<std::endl;
+	os<<left_sep<<unit.name()<<sep<<unit.path()<<std::endl;
 
-	//std::cout<<left_sep<<"before units print"<<std::endl;
 	left_sep += sep;
 	for(auto iter : unit.sub_units())
 	{
 		os<<iter;
 	}
 	left_sep = left_sep.substr(0,left_sep.size() - sep.size());
-	//std::cout<<left_sep<<"after units print"<<std::endl;
 
 	return os;
 }

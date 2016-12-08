@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!ELEMENT schema (name,path,info,units)>
+<!ELEMENT schema (name,path,units)>
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT path (#PCDATA)>
-<!ELEMENT info (#PCDATA)>
 <!ELEMENT units (unit+)>
-<!ELEMENT unit (name,path,info,units?)>
-<!ATTLIST unit catalog (true|false) #REQUIRED>
+<!ELEMENT unit (name,info,units?)>
