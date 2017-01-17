@@ -17,18 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.";
  */
 
+#include <glibmm.h>
 #include <gtkmm.h>
 #include <iostream>
-#include "view/main_window.hpp"
+#include "view/window_manager.hpp"
 
 #include "config.h"
 
 int
 main (int argc, char *argv[])
 {
-	Gtk::Main kit(argc, argv);
-	DDType::MainWindow window;
-	kit.run(window);
+	Gtk::Main app(argc, argv);
+	DDType::WindowManager::shared_manager().show_main_window();
+	app.run();
 	return 0;
 }
 
