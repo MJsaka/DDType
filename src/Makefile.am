@@ -23,30 +23,3 @@ ddtype_SOURCES = \
 				 view/practise_window.cpp \
 				 view/test_window.hpp \
 				 view/test_window.cpp 
-
-schemadir = $(pkgdatadir)/schema
-
-schemadefdir = $(schemadir)/def
-schemadtddir = $(schemadir)/dtd
-schemadatadir = $(schemadir)/data
-schemainfodir = $(schemadir)/info
-
-zmdir = $(schemadatadir)/zm
-
-zmdzdir = $(zmdir)/dz
-zmzgzgdir = $(zmdir)/zg/zg
-zmzgfgdir = $(zmdir)/zg/fg
-
-dist_schemadef_DATA = resources/schema/def/zm.xml 
-dist_schemadtd_DATA = resources/schema/dtd/schema.dtd \
-				resources/schema/dtd/unit_data.dtd \
-				resources/schema/dtd/unit_log.dtd
-
-dist_zmdz_DATA = resources/schema/data/zm/dz/data.xml 
-dist_zmzgzg_DATA = resources/schema/data/zm/zg/zg/data.xml 
-dist_zmzgfg_DATA = resources/schema/data/zm/zg/fg/data.xml 
-
-EXTRA_DIST = $(dist_schemadef_DATA) $(dist_schemadtd_DATA) $(dist_zmdz_DATA) $(dist_zmzgzg_DATA) $(dist_zmzgfg_DATA)
-
-uninstall-local:
-	-rm -r $(pkgdatadir)

@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = src 
+SUBDIRS = src resources
 
 export AM_CPPFLAGS = \
 	-std=c++11 \

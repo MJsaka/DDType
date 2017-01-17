@@ -1,8 +1,8 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT([ddtype],[1.0],[mjsaka@qq.com])
-AM_INIT_AUTOMAKE([gnu subdir-objects])
+AC_INIT([ddtype],[1.0.0],[mjsaka@qq.com])
+AM_INIT_AUTOMAKE([-Wall gnu subdir-objects])
 AC_CONFIG_SRCDIR([src/main.cc])
 AC_CONFIG_HEADERS([config.h])
 
@@ -24,5 +24,8 @@ PKG_CHECK_MODULES([LIBSIGCXX], [sigc++-2.0])
 AC_CONFIG_FILES([
 				 Makefile
 				 src/Makefile
+				 resources/Makefile
+				 resources/pixmap/Makefile
+				 resources/schema/Makefile
 				 ])
 AC_OUTPUT
