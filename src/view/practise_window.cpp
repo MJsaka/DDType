@@ -14,7 +14,7 @@ namespace DDType
 	PractiseWindow::PractiseWindow()
 	{
 		set_title("Practise");
-		set_border_width(5);
+		set_border_width(0);
 		signal_delete_event().connect(sigc::mem_fun(*this,&PractiseWindow::on_destroy));
 	}
 	void PractiseWindow::finish()
@@ -31,8 +31,8 @@ namespace DDType
 	}
 	bool PractiseWindow::on_destroy(GdkEventAny*)
 	{
-		hide();
 		WindowManager::shared_manager().show_main_window();
+		hide();
 		return true;
 	}
 	sigc::signal<void,Glib::ustring> PractiseWindow::signal_key_pressed()

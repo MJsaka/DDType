@@ -14,7 +14,7 @@ namespace DDType
 	TestWindow::TestWindow()
 	{
 		set_title("Test");
-		set_border_width(5);
+		set_border_width(0);
 		signal_delete_event().connect(sigc::mem_fun(*this,&TestWindow::on_destroy));
 	}
 	void TestWindow::finish()
@@ -31,8 +31,8 @@ namespace DDType
 	}
 	bool TestWindow::on_destroy(GdkEventAny*)
 	{
-		hide();
 		WindowManager::shared_manager().show_main_window();
+		hide();
 		return true;
 	}
 	sigc::signal<void,Glib::ustring> TestWindow::signal_key_pressed()
