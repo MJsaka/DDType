@@ -16,17 +16,28 @@ namespace DDType{
 	{
 		public:
 			MainWindow();
+			bool on_destroy(GdkEventAny*);
 			void on_tree_row_activated(const Gtk::TreeModel::Path& path, Gtk::TreeViewColumn* column);
 			void on_tree_row_expanded(const Gtk::TreeModel::iterator&, const Gtk::TreeModel::Path&);
+			void on_practise_button();
+			void on_test_button();
 		private:
+			Gtk::VBox m_v_box;
 			Gtk::HBox m_h_box;
+
+			Gtk::Toolbar m_toolbar;
+			Gtk::ToolButton m_practise_button;
+			Gtk::ToolButton m_test_button;
+
 			Gtk::TreeView m_tree_view;
-			Gtk::TextView m_info_view;
 			Gtk::TreeModelColumn<Glib::ustring> m_col_name;
 			Gtk::TreeModel::ColumnRecord m_model_columns;
 			Glib::RefPtr<Gtk::TreeStore> m_ref_tree_store;
+			Gtk::TreeModel::Path m_current_path;
+
+			Gtk::TextView m_info_view;
 			Glib::RefPtr<Gtk::TextBuffer> m_buffer;
-		protected:
+
 			void fill_tree_iter(Gtk::TreeStore::iterator& iter, Unit& unit);
 			void construct_tree_view();
 	};
