@@ -9,8 +9,4 @@
 
 namespace DDType 
 {
-	void TypeInterface::set_type_callback(const sigc::slot<void, char>& slot)
-	{
-		m_signal_key_typed.connect(slot);
-	}
 }
