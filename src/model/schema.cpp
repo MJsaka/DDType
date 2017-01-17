@@ -23,16 +23,12 @@ namespace DDType
 		auto units_node = unit_node->get_first_child("units");
 		if (units_node != nullptr)
 		{
-			m_is_catalog = true;
 			auto sub_unit_nodes = units_node->get_children("unit");
 			for(auto iter : sub_unit_nodes)
 			{
 				auto unit = Unit(iter);
 				m_sub_units.push_back(unit);
 			}
-		}else
-		{
-			m_is_catalog = false;
 		}
 	}
 }
@@ -41,7 +37,7 @@ std::ostream& operator<<(std::ostream& os, const DDType::Unit& unit)
 	const static auto sep = Glib::ustring("    ");
 	static auto left_sep = Glib::ustring();
 
-	os<<left_sep<<unit.name()<<sep<<unit.path()<<std::endl;
+	os<<left_sep<<unit.name()<<sep<<unit.path()<<sep<<unit.sub_units().size()<<std::endl;
 
 	left_sep += sep;
 	for(auto iter : unit.sub_units())

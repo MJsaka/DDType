@@ -17,13 +17,11 @@ namespace DDType
 	{
 		public:
 			explicit Unit(const xmlpp::Node* unit_node);
-			const bool is_catalog() const {return m_is_catalog;};
 			const Glib::ustring& name() const {return m_name;};
 			const Glib::ustring& path() const {return m_path;};
 			const std::vector<Unit>& sub_units() const {return m_sub_units;};
 
 		private:
-			bool m_is_catalog;
 			Glib::ustring m_name;
 			Glib::ustring m_path;
 			std::vector<Unit> m_sub_units;
