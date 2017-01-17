@@ -7,17 +7,20 @@
 
 #include "type_controller.hpp"
 #include <sigc++/sigc++.h>
+#include <glibmm.h>
 #include <libxml++/libxml++.h>
 #include <iostream>
 
 namespace DDType 
 {
-	TypeController::TypeController(TypeInterface& window):m_window(window)
+	void TypeController::set_interface(TypeInterface& interface)
 	{
-		m_window.set_type_callback(sigc::mem_fun(*this, &TypeController::on_typed));
+		m_interface = interface;
+		interface.signal_key_pressed().connect(sigc::mem_fun(*this,&TypeController::on_typed));
 	}
 	void TypeController::set_unit_path(std::string path)
 	{
+		m_unit_data_list = std::list<UnitDataItem>();
 		try {
 			auto parser = new xmlpp::DomParser(path, true);
 			auto root = parser->get_document()->get_root_node();
@@ -32,7 +35,7 @@ namespace DDType
 			std::cout<<e.what()<<std::endl;
 		}
 	}
-	void TypeController::on_typed(char c)
+	void TypeController::on_typed(Glib::ustring c)
 	{
 	}
 }

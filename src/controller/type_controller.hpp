@@ -15,14 +15,15 @@ namespace DDType
 	class TypeController
 	{
 		public:
-			TypeController(TypeInterface& window);
-			void on_typed(char c);
+			TypeController();
+			void on_typed(Glib::ustring c);
 			void set_unit_path(std::string path);
+			void set_interface(TypeInterface& interface);
 		private:
-			TypeInterface& m_window;
+			TypeInterface& m_interface;
 			std::list<UnitDataItem> m_unit_data_list;
 			int m_max_code_len_of_current_item;
-			std::vector<char> m_input;
+			Glib::ustring m_input;
 	};
 }
 #endif
