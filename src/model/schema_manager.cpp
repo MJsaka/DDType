@@ -20,6 +20,7 @@ namespace DDType
 			auto parser = new xmlpp::DomParser(schema_path, true);
 			auto root = parser->get_document()->get_root_node();
 			Schema schema(root);
+			std::cout<<schema;
 			sm_schemas.push_back(schema);
 			delete parser;
 		}
@@ -29,19 +30,37 @@ namespace DDType
 	}
 	const Glib::ustring SchemaManager::unit_data_path(const Gtk::TreeModel::Path& path)
 	{
-		Glib::ustring sub_path;
-		auto schema = sm_schemas[path[0]];
-		sub_path += schema.path() + "/";
-
-		Unit& unit = schema;
-		auto sub = schema.sub_units();
+		return data_path_base + unit_path(path) + "data.xml";
+	}
+	const Glib::ustring SchemaManager::unit_info_path(const Gtk::TreeModel::Path& path)
+	{
+		return data_path_base + unit_path(path) + "info.xml";
+	}
+	bool SchemaManager::is_catalog(const Gtk::TreeModel::Path& path)
+	{
+		Unit unit = sm_schemas[path[0]];
 		for (int i = 1; i < path.size(); ++i)
 		{
+			auto sub = unit.sub_units();
 			unit = sub[path[i]];
-			sub_path += unit.path() + "/";
-			sub = unit.sub_units();
 		}
-		sub_path += "data.xml";
-		return data_path_base + sub_path;
+		std::cout<<unit.name()<<std::endl;
+		return unit.sub_units().size() > 0;
+	}
+	const Glib::ustring SchemaManager::unit_path(const Gtk::TreeModel::Path& path)
+	{
+		Glib::ustring upath;
+		auto schema = sm_schemas[path[0]];
+		upath += schema.path() + "/";
+
+		Unit unit = schema;
+		for (int i = 1; i < path.size(); ++i)
+		{
+			auto sub = unit.sub_units();
+			unit = sub[path[i]];
+			upath += unit.path() + "/";
+		}
+		std::cout<<upath<<std::endl;
+		return upath;
 	}
 }

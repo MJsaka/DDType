@@ -16,12 +16,15 @@ namespace DDType
 			static void update_schemas();
 			static const std::vector<Schema>& schemas() {return sm_schemas;};
 			static const Glib::ustring unit_data_path(const Gtk::TreeModel::Path& path);
+			static const Glib::ustring unit_info_path(const Gtk::TreeModel::Path& path);
+			static bool is_catalog(const Gtk::TreeModel::Path& path);
 
 		private:
 			SchemaManager();
 			SchemaManager(SchemaManager&);
 			SchemaManager& operator= (const SchemaManager&);
 			static std::vector<Schema> sm_schemas;
+			static const Glib::ustring unit_path(const Gtk::TreeModel::Path& path);
 	};
 }
 #endif
