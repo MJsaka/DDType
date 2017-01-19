@@ -17,7 +17,7 @@ namespace DDType
 		public:
 			TypeController();
 			void on_typed(Glib::ustring c);
-			void set_unit_path(std::string path);
+			void set_data_path(std::string path);
 			void set_interface(TypeInterface& interface);
 		private:
 			TypeInterface& m_interface;

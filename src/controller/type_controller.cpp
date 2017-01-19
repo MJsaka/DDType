@@ -18,7 +18,7 @@ namespace DDType
 		m_interface = interface;
 		interface.signal_key_pressed().connect(sigc::mem_fun(*this,&TypeController::on_typed));
 	}
-	void TypeController::set_unit_path(std::string path)
+	void TypeController::set_data_path(std::string path)
 	{
 		m_unit_data_list = std::list<UnitDataItem>();
 		try {
