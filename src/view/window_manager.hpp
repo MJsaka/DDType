@@ -17,20 +17,24 @@ namespace DDType
 {
 	class WindowManager
 	{
-		private:
-			WindowManager();
-			WindowManager(const WindowManager&);
-			~WindowManager();
-
-			MainWindow* m_main_window;
-			PractiseWindow* m_practise_window;
-			TestWindow* m_test_window;
-			static WindowManager* sm_manager;
 		public:
 			void show_main_window() const;
 			void show_practise_window(const Glib::ustring path) const;
 			void show_test_window(const Glib::ustring path) const;
+
 			static const WindowManager& shared_manager();
+		private:
+			WindowManager();
+			~WindowManager();
+			WindowManager(const WindowManager&);
+			WindowManager& operator=(const WindowManager&);
+
+			static WindowManager* sm_manager;
+
+			MainWindow* m_main_window;
+			PractiseWindow* m_practise_window;
+			TestWindow* m_test_window;
+			Glib::ustring m_path;
 	};
 }
 

@@ -9,14 +9,13 @@
 #include <iostream>
 namespace DDType
 {
-	WindowManager* WindowManager::sm_manager;
+	WindowManager* WindowManager::sm_manager = nullptr;
 	WindowManager::WindowManager()
 	{
 		m_main_window = new MainWindow;
 		m_practise_window = new PractiseWindow;
 		m_test_window = new TestWindow;
 	}
-	WindowManager::WindowManager(const WindowManager&){}
 	WindowManager::~WindowManager()
 	{
 		delete m_main_window;
@@ -39,13 +38,13 @@ namespace DDType
 	void WindowManager::show_practise_window(const Glib::ustring path) const
 	{
 		std::cout<<"show_practise_window"<<std::endl;
+		m_practise_window->show(path);
 		m_main_window->hide();
-		m_practise_window->show_all();
 	}
 	void WindowManager::show_test_window(const Glib::ustring path) const
 	{
 		std::cout<<"show_test_window"<<std::endl;
+		m_test_window->show(path);
 		m_main_window->hide();
-		m_test_window->show_all();
 	}
 }
