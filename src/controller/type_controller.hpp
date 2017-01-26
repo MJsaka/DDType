@@ -15,15 +15,27 @@ namespace DDType
 	class TypeController
 	{
 		public:
-			TypeController();
-			void on_typed(Glib::ustring c);
+			static TypeController& shared_controller();
+
+			void on_typed(Glib::ustring input);
 			void set_data_path(std::string path);
-			void set_interface(TypeInterface& interface);
+			void set_interface(TypeInterface* interface);
+			Glib::ustring targets();
 		private:
-			TypeInterface& m_interface;
+			TypeController();
+			TypeController(const TypeController&);
+			TypeController& operator=(const TypeController&);
+
+			static TypeController* sm_controller;
+
+			TypeInterface* m_interface;
 			std::list<UnitDataItem> m_unit_data_list;
-			int m_max_code_len_of_current_item;
-			Glib::ustring m_input;
+			std::list<UnitDataItem> m_miss_data_list;
+			const UnitDataItem* m_current_data_item;
+			void match(Glib::ustring input);
+			void match_success();
+			void match_fail();
+			void tip();
 	};
 }
 #endif
