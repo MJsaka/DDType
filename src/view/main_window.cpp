@@ -9,6 +9,7 @@
 #include "window_manager.hpp"
 #include "../model/schema.hpp"
 #include "../model/schema_manager.hpp"
+#include "../controller/type_controller.hpp"
 #include <gtkmm.h>
 #include <glibmm.h>
 #include <iostream>
@@ -18,17 +19,18 @@ namespace DDType {
 
 	MainWindow::MainWindow()
 	{
-		m_toolbar.set_toolbar_style(Gtk::TOOLBAR_BOTH);
-		m_toolbar.set_icon_size(Gtk::IconSize(48));
-
 		m_practise_button = Gtk::ToolButton("Practise");
 		m_practise_button.signal_clicked().connect(sigc::mem_fun(*this,&MainWindow::on_practise_button));
-		
 		m_test_button = Gtk::ToolButton("Test");
 		m_test_button.signal_clicked().connect(sigc::mem_fun(*this,&MainWindow::on_test_button));
 
-		m_toolbar.append(m_practise_button);
-		m_toolbar.append(m_test_button);
+		m_h_button_box.pack_start(m_practise_button);
+		m_h_button_box.pack_start(m_test_button);
+		//m_h_button_box.get_style_context()->add_class("linked");
+		m_h_button_box.get_style_context()->context_save();
+		m_actionbar.set_center_widget(m_h_button_box);
+		m_headerbar.set_custom_title(m_actionbar);
+		m_headerbar.set_show_close_button(true);
 		
 		construct_tree_view();
 		m_current_path = Gtk::TreeModel::Path(1);
@@ -38,20 +40,20 @@ namespace DDType {
 		m_h_box.pack_start(m_info_view,true,true);
 		m_h_box.set_spacing(5);
 
-		m_v_box.pack_start(m_toolbar,false,false);
+		m_v_box.pack_start(m_headerbar,false,false);
 		m_v_box.pack_start(m_h_box,true,true);
 
 		set_title("DDType");
-		set_border_width(5);
-		signal_delete_event().connect(sigc::mem_fun(*this,&MainWindow::on_destroy));
+		set_border_width(0);
+		set_default_icon_name("ddtype");
 		add(m_v_box);
+		signal_delete_event().connect(sigc::mem_fun(*this,&MainWindow::on_destroy));
 	}
 	void MainWindow::construct_tree_view()
 	{
 		m_model_columns.add(m_col_name);
 		m_ref_tree_store = Gtk::TreeStore::create(m_model_columns);
-		SchemaManager::update_schemas();
-		auto schemas = SchemaManager::schemas();
+		auto schemas = SchemaManager::shared_manager().schemas();
 		for (auto schema : schemas)
 		{
 			auto tree_iter_schema = m_ref_tree_store->append();
@@ -79,7 +81,7 @@ namespace DDType {
 		m_current_path = path;
 		Gtk::TreeModel::iterator iter = m_ref_tree_store -> get_iter(path);
 		if(iter){
-			m_buffer->set_text(SchemaManager::unit_data_path(path));
+			m_buffer->set_text(SchemaManager::shared_manager().unit_data_path(path));
 		}
 	}
 	void MainWindow::on_tree_row_expanded(const Gtk::TreeModel::iterator& iter, const Gtk::TreeModel::Path& path)
@@ -89,20 +91,20 @@ namespace DDType {
 			m_tree_view.expand_all();
 		}
 	}
-	void MainWindow::on_practise_button()
+	void MainWindow::on_practise_button() const
 	{
-		if(!SchemaManager::is_catalog(m_current_path))
+		if(!SchemaManager::shared_manager().is_catalog(m_current_path))
 		{
-			std::cout<<m_current_path.to_string()<<std::endl;
-			Glib::ustring path = SchemaManager::unit_data_path(m_current_path);
+			Glib::ustring path = SchemaManager::shared_manager().unit_data_path(m_current_path);
 			WindowManager::shared_manager().show_practise_window(path);
 		}
 	}
-	void MainWindow::on_test_button()
+	void MainWindow::on_test_button() const
 	{
-		if(!SchemaManager::is_catalog(m_current_path))
+		if(!SchemaManager::shared_manager().is_catalog(m_current_path))
 		{
-			WindowManager::shared_manager().show_test_window(SchemaManager::unit_data_path(m_current_path));
+			Glib::ustring path = SchemaManager::shared_manager().unit_data_path(m_current_path);
+			WindowManager::shared_manager().show_test_window(path);
 		}
 	}
 	bool MainWindow::on_destroy(GdkEventAny*)

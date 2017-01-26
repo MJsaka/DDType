@@ -19,13 +19,15 @@ namespace DDType{
 			bool on_destroy(GdkEventAny*);
 			void on_tree_row_activated(const Gtk::TreeModel::Path& path, Gtk::TreeViewColumn* column);
 			void on_tree_row_expanded(const Gtk::TreeModel::iterator&, const Gtk::TreeModel::Path&);
-			void on_practise_button();
-			void on_test_button();
+			void on_practise_button() const;
+			void on_test_button() const;
 		private:
 			Gtk::VBox m_v_box;
 			Gtk::HBox m_h_box;
 
-			Gtk::Toolbar m_toolbar;
+			Gtk::HeaderBar m_headerbar;
+			Gtk::ActionBar m_actionbar;
+			Gtk::HButtonBox m_h_button_box;
 			Gtk::ToolButton m_practise_button;
 			Gtk::ToolButton m_test_button;
 
