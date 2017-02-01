@@ -20,7 +20,7 @@ namespace DDType
 			void on_typed(Glib::ustring input);
 			void set_data_path(std::string path);
 			void set_interface(TypeInterface* interface);
-			Glib::ustring targets();
+			const std::list<Glib::ustring>& targets() const {return m_target_list;};
 		private:
 			TypeController();
 			TypeController(const TypeController&);
@@ -31,10 +31,11 @@ namespace DDType
 			TypeInterface* m_interface;
 			std::list<UnitDataItem> m_unit_data_list;
 			std::list<UnitDataItem> m_miss_data_list;
-			const UnitDataItem* m_current_data_item;
+			std::list<Glib::ustring> m_target_list;
 			void match(Glib::ustring input);
 			void match_success();
 			void match_fail();
+			void retry_miss();
 			void tip();
 	};
 }

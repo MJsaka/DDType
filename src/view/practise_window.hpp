@@ -15,13 +15,24 @@ namespace DDType
 	{
 		public:
 			PractiseWindow();
+			void show(Glib::ustring path);
+			void show();
 			void finish();
 			void match_success();
 			void match_fail();
 			void tip();
+			void retry_miss();
 			bool on_destroy(GdkEventAny*);
-			sigc::signal<void,Glib::ustring> signal_key_pressed();
+			void on_insert(guint, const gchar*, guint);
 		private:
+			Gtk::VBox m_v_box;
+			Gtk::Table m_table;
+			std::list<Gtk::Label*> m_labels;
+			std::list<Gtk::Label*>::iterator m_current_label;
+			Gtk::Alignment m_entry_alignment;
+			Gtk::Entry m_entry;
+			Glib::RefPtr<Gtk::EntryBuffer> m_entry_buffer;
+			void fill_grid();
 	};
 }
 

@@ -17,7 +17,6 @@ namespace DDType
 	TypeController::TypeController()
 	{
 		m_interface = nullptr;
-		m_current_data_item = nullptr;
 	}
 	TypeController& TypeController::shared_controller()
 	{
@@ -39,33 +38,25 @@ namespace DDType
 	{
 		m_unit_data_list = std::list<UnitDataItem>();
 		m_miss_data_list = std::list<UnitDataItem>();
+		m_target_list = std::list<Glib::ustring>();
 		try {
 			auto parser = new xmlpp::DomParser(path, true);
 			auto root = parser->get_document()->get_root_node();
 			for(auto data_item_node : root->get_children("item")){
 				auto data_item = UnitDataItem(data_item_node);
 				m_unit_data_list.push_back(data_item);
+				m_target_list.push_back(data_item.target());
 			}
 			delete parser;
-
-			m_current_data_item = &(m_unit_data_list.front());
 		}
 		catch (xmlpp::exception e){
 			std::cout<<e.what()<<std::endl;
 		}
 	}
 
-	Glib::ustring TypeController::targets()
-	{
-		Glib::ustring ts;
-		for(auto ud : m_unit_data_list)
-		{
-			ts += ud.target();
-		}
-		return ts;
-	}
 	void TypeController::on_typed(Glib::ustring input)
 	{
+		std::cout<<input<<std::endl;
 		if (input == "\t"){
 			tip();
 		}else{
@@ -78,11 +69,12 @@ namespace DDType
 	}
 	void TypeController::match(Glib::ustring input)
 	{
-		if(input == m_current_data_item->target()){
+		UnitDataItem& ud = m_unit_data_list.front();
+		if(input == ud.target()){
 			match_success();
 			return;
 		}
-		for(auto code : m_current_data_item->codes()){
+		for(auto code : ud.codes()){
 			if(input == code){
 				match_success();
 				return;
@@ -95,28 +87,35 @@ namespace DDType
 	void TypeController::match_success()
 	{
 		m_unit_data_list.pop_front();
+		m_target_list.pop_front();
 		if(!m_unit_data_list.empty()){
-			m_current_data_item = &(m_unit_data_list.front());
 			m_interface->match_success();
 		}else if(m_miss_data_list.empty()){
 			m_interface->finish();
 		}else{
-			m_unit_data_list = m_miss_data_list;
-			m_miss_data_list = std::list<UnitDataItem>();
-			m_interface->retry_miss();
+			retry_miss();
 		}
 	}
 	void TypeController::match_fail()
 	{
-		m_miss_data_list.push_back(*m_current_data_item);
+		m_miss_data_list.push_back(m_unit_data_list.front());
 		m_unit_data_list.pop_front();
+		m_target_list.pop_front();
 		if(!m_unit_data_list.empty()){
-			m_current_data_item = &(m_unit_data_list.front());
 			m_interface->match_fail();
 		}else{
-			m_unit_data_list = m_miss_data_list;
-			m_miss_data_list = std::list<UnitDataItem>();
-			m_interface->retry_miss();
+			retry_miss();
 		}
+	}
+	void TypeController::retry_miss()
+	{
+		m_unit_data_list = m_miss_data_list;
+		m_miss_data_list = std::list<UnitDataItem>();
+		m_target_list = std::list<Glib::ustring>();
+		for(auto ud : m_unit_data_list)
+		{
+			m_target_list.push_back(ud.target());
+		}
+		m_interface->retry_miss();
 	}
 }
