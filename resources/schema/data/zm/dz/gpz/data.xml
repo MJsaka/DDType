@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE data SYSTEM "file:///usr/local/share/ddtype/schema/dtd/unit_data.dtd">
+
+<data>
+	<item><target>这</target><code>w</code></item>
+	<item><target>月</target><code>q</code></item>
+	<item><target>我</target><code>m</code></item>
+	<item><target>发</target><code>z</code></item>
+	<item><target>现</target><code>c</code></item>
+	<item><target>了</target><code>y</code></item>
+	<item><target>对</target><code>x</code></item>
+	<item><target>一</target><code>a</code></item>
+	<item><target>度</target><code>t</code></item>
+	<item><target>所</target><code>p</code></item>
+	<item><target>说</target><code>s</code></item>
+	<item><target>要</target><code>f</code></item>
+	<item><target>成</target><code>h</code></item>
+	<item><target>为</target><code>u</code></item>
+	<item><target>个</target><code>o</code></item>
+	<item><target>没</target><code>v</code></item>
+	<item><target>多</target><code>r</code></item>
+	<item><target>中</target><code>j</code></item>
+	<item><target>用</target><code>l</code></item>
+	<item><target>地</target><code>b</code></item>
+	<item><target>在</target><code>g</code></item>
+	<item><target>世</target><code>e</code></item>
+	<item><target>上</target><code>i</code></item>
+	<item><target>的</target><code>d</code></item>
+	<item><target>是</target><code>k</code></item>
+	<item><target>他</target><code>n</code></item>
+</data>

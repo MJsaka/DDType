@@ -22,6 +22,12 @@
 		<unit>
 			<name>单字</name>
 			<path>dz</path>
+			<units>
+				<unit>
+					<name>高频字</name>
+					<path>gpz</path>
+				</unit>
+			</units>
 		</unit>
 	</units>
 </schema>

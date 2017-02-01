@@ -27,5 +27,9 @@ AC_CONFIG_FILES([
 				 resources/Makefile
 				 resources/pixmap/Makefile
 				 resources/schema/Makefile
+				 resources/schema/def/Makefile
+				 resources/schema/dtd/Makefile
+				 resources/schema/data/Makefile
+				 resources/schema/data/zm/Makefile
 				 ])
 AC_OUTPUT
