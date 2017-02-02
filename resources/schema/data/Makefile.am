@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-SUBDIRS = zm
+SUBDIRS = zhengma 
 export schemadatadir = $(schemadir)/data
 
 uninstall-local:

@@ -10,7 +10,7 @@
 
 namespace DDType
 {
-	const static std::string schema_path("/usr/local/share/ddtype/schema/def/zm.xml");
+	const static std::string schema_path("/usr/local/share/ddtype/schema/def/zhengma.xml");
 	const static Glib::ustring data_path_base("/usr/local/share/ddtype/schema/data/");
 	SchemaManager* SchemaManager::sm_manager = nullptr;
 

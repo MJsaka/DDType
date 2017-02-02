@@ -30,6 +30,6 @@ AC_CONFIG_FILES([
 				 resources/schema/def/Makefile
 				 resources/schema/dtd/Makefile
 				 resources/schema/data/Makefile
-				 resources/schema/data/zm/Makefile
+				 resources/schema/data/zhengma/Makefile
 				 ])
 AC_OUTPUT
