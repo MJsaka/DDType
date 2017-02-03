@@ -76,7 +76,7 @@
 			<path>jianmazi</path>
 			<units>
 				<unit>
-					<name>一级简码字(高频字)</name>
+					<name>一级简码字</name>
 					<path>yijianzi</path>
 				</unit>
 				<unit>
@@ -94,12 +94,26 @@
 			<path>jianmaci</path>
 			<units>
 				<unit>
-					<name>二级简码词(高频词)</name>
+					<name>二级简码词</name>
 					<path>erjianci</path>
 				</unit>
 				<unit>
 					<name>三级简码词</name>
 					<path>sanjianci</path>
+				</unit>
+			</units>
+		</unit>
+		<unit>
+			<name>高频字词</name>
+			<path>gaopinzici</path>
+			<units>
+				<unit>
+					<name>高频字</name>
+					<path>gaopinzi</path>
+				</unit>
+				<unit>
+					<name>高频词</name>
+					<path>gaopinci</path>
 				</unit>
 			</units>
 		</unit>
