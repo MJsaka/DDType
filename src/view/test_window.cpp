@@ -7,6 +7,7 @@
 
 #include "test_window.hpp"
 #include "window_manager.hpp"
+#include "../controller/type_controller.hpp"
 #include <sigc++/sigc++.h>
 
 namespace DDType
@@ -16,6 +17,13 @@ namespace DDType
 		set_title("Test");
 		set_border_width(0);
 		signal_delete_event().connect(sigc::mem_fun(*this,&TestWindow::on_destroy));
+	}
+	void TestWindow::show(Glib::ustring path)
+	{
+		m_path = path;	
+		TypeController::shared_controller().set_data_path(path);
+		TypeController::shared_controller().set_interface(this);
+		show_all();
 	}
 	void TestWindow::finish()
 	{
@@ -29,13 +37,13 @@ namespace DDType
 	void TestWindow::tip()
 	{
 	}
+	void TestWindow::retry_miss()
+	{
+	}
 	bool TestWindow::on_destroy(GdkEventAny*)
 	{
 		WindowManager::shared_manager().show_main_window();
 		hide();
 		return true;
-	}
-	sigc::signal<void,Glib::ustring> TestWindow::signal_key_pressed()
-	{
 	}
 }

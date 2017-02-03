@@ -15,12 +15,15 @@ namespace DDType
 	{
 		public:
 			TestWindow();
+			void show(Glib::ustring path);
 			void finish();
 			void match_success();
 			void match_fail();
 			void tip();
+			void retry_miss();
 			bool on_destroy(GdkEventAny*);
-			sigc::signal<void,Glib::ustring> signal_key_pressed();
+		private:
+			Glib::ustring m_path;
 	};
 }
 
